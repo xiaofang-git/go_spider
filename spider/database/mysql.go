@@ -6,6 +6,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"bufio"
+	"strings"
 )
 
 
@@ -19,7 +20,13 @@ func init() {
 	fmt.Println("请输入mysql连接用户名")
 	username, _ = input.ReadString('\n')	
 	fmt.Println("请输入mysql连接密码")
-	password, _ = input.ReadString('\n')	
+	password, _ = input.ReadString('\n')
+
+	need_replace := " \n"
+	host = strings.Trim(host, need_replace)
+	port = strings.Trim(port, need_replace)
+	username = strings.Trim(username, need_replace)
+	password = strings.Trim(password, need_replace)
 
 	var dbConfig = map[string]interface{} {
 		"Default":         "mysql_dev",// 默认数据库配置
@@ -45,13 +52,13 @@ func init() {
 			},
 		},
 	}
-	fmt.Println(dbConfig)
+
 	conn, err := gorose.Open(dbConfig)
 	if err != nil {
 		fmt.Println(err)
 	}else{
 		defer conn.Close()
-		table := conn.Table("spider")
+		table := conn.Table("autohome")
 		fmt.Println(table.First())
 	}
 }
