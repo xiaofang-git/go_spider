@@ -10,7 +10,7 @@ import (
 
 func run() {
 	price := &spiders.Autohome{
-		App_price_url: "http://cars.app.autohome.com.cn/jiage_v7.9.5/cars/ownerpricecinfo-pm1-p30396-c0-sp28533-se3324.json",
+		Id: 30396,
 	}
 	var info item.PriceInfo
 	html := price.Get_price()
