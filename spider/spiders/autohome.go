@@ -11,14 +11,14 @@ type Autohome struct {
 	App_price_url string
 }
 
-func (self *Autohome) Get_price()  {
+func (self *Autohome) Get_price() []byte {
 	response, err := http.Get(self.App_price_url)
 	if err != nil {
 		fmt.Println(err)
-	}else{
-		body := make([]byte, 5000)
-		response.Body.Read(body)
-		text := string(body)
-		fmt.Println(text)
 	}
+	var body []byte = make([]byte, 1000, 2000)
+	response.Body.Read(body)
+	// text := string(body)
+	fmt.Println(string(body[:cap(body)]))
+	return body
 }

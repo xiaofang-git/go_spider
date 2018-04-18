@@ -10,7 +10,7 @@ import (
 )
 
 
-func init() {
+func Connect() interface{} {
 	var host, port, username, password string
 	input := bufio.NewReader(os.Stdin)
 	fmt.Println("请输入mysql连接地址")
@@ -56,9 +56,8 @@ func init() {
 	conn, err := gorose.Open(dbConfig)
 	if err != nil {
 		fmt.Println(err)
+		return nil
 	}else{
-		defer conn.Close()
-		table := conn.Table("autohome")
-		fmt.Println(table.First())
+		return conn
 	}
 }
