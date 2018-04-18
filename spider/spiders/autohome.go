@@ -16,9 +16,8 @@ func (self *Autohome) Get_price() []byte {
 	if err != nil {
 		fmt.Println(err)
 	}
-	var body []byte = make([]byte, 1000, 2000)
-	response.Body.Read(body)
+	var html []byte = make([]byte, 2048)
+	response.Body.Read(html)
 	// text := string(body)
-	fmt.Println(string(body[:cap(body)]))
-	return body
+	return html
 }
