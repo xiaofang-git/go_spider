@@ -34,7 +34,7 @@ func (self *PriceInfo) Save() {
 	db := database.Connect()
 	defer db.Close()
 	spider := db.Table("autohome")
-	id, err := spider.Data(map[string]interface{}{"id": 1, "carname":carname, "price": price, "seriesid": seriesid, "specid": specid}).Insert()
+	id, err := spider.Data(map[string]interface{}{"carname":carname, "price": price, "seriesid": seriesid, "specid": specid}).Insert()
 	if err != nil {
 		fmt.Println(err)
 	}
