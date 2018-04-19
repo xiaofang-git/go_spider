@@ -8,9 +8,9 @@ import (
 )
 
 
-func run() {
+func run(id int) {
 	price := &spiders.Autohome{
-		Id: 30396,
+		Id: id,
 	}
 	var info item.PriceInfo
 	html := price.Get_price()
@@ -33,5 +33,8 @@ func run() {
 
 
 func main() {
-	run()
+	for index := 10000; index < 101000; index++ {
+		run(index)		
+	}
+	item.DB.Close()
 }

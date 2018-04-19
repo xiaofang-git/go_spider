@@ -6,6 +6,8 @@ import (
 	"go_spider/spider/database"
 )
 
+var DB = database.Connect() 
+
 type PriceInfo struct {
 	Message string
 	Result result
@@ -31,12 +33,10 @@ func (self *PriceInfo) Save() {
 	specid := self.Result.Pricemessage.Specid
 	fmt.Println(carname, price, seriesid ,specid)
 
-	db := database.Connect()
-	defer db.Close()
-	spider := db.Table("autohome")
+	spider := DB.Table("autohome")
 	id, err := spider.Data(map[string]interface{}{"carname":carname, "price": price, "seriesid": seriesid, "specid": specid}).Insert()
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(id)
+	fmt.Println(id, "数据保存成功")
 }
