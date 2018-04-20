@@ -33,8 +33,16 @@ func run(id int) {
 
 
 func main() {
-	for index := 10000; index < 101000; index++ {
-		run(index)		
+	// 从数据库读取当前库中最大的mid
+	max_mid, _ := item.DB.Table("autohome").Max("specid")
+
+	id, _ := max_mid.(int)
+
+	end := id + 1000
+
+	for id < end {
+		run(id)
+		id++
 	}
 	item.DB.Close()
 }
